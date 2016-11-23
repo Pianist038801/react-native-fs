@@ -74,7 +74,6 @@
     }
 
     NSData *fileData = [NSData dataWithContentsOfFile:filepath];
-
     [reqBody appendData:fileData];
   }
 
