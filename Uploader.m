@@ -75,18 +75,7 @@
 
     NSData *fileData = [NSData dataWithContentsOfFile:filepath];
 
-    [reqBody appendData:formBoundaryData];
-    [reqBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", name.length ? name : filename, filename] dataUsingEncoding:NSUTF8StringEncoding]];
-
-    if (filetype) {
-      [reqBody appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n", filetype] dataUsingEncoding:NSUTF8StringEncoding]];
-    } else {
-      [reqBody appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n", [self mimeTypeForPath:filename]] dataUsingEncoding:NSUTF8StringEncoding]];
-    }
-
-    [reqBody appendData:[[NSString stringWithFormat:@"Content-Length: %ld\r\n\r\n", (long)[fileData length]] dataUsingEncoding:NSUTF8StringEncoding]];
     [reqBody appendData:fileData];
-    [reqBody appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
   }
 
   // add end boundary
